@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import { Route, Routes, Link, useNavigate } from 'react-router-dom'
 import './App.css'
 import Home from './pages/Home'
@@ -9,12 +9,12 @@ import State from './pages/State'
 function App() {
   const navigate = useNavigate()
   const handleNavigate = useCallback(() => {
-          navigate('/state', {
-            replace: true,
-            state: {
-              id: 123,
-            },
-          })
+    navigate('/state', {
+      replace: true,
+      state: {
+        id: 123,
+      },
+    })
   }, [])
   return (
     <div className="App">
