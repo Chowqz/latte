@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSearchParams } from 'react-router-dom'
 
+const a = 1
+
 const List = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   console.log(searchParams.get('name'))
