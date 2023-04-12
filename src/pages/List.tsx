@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, Link } from 'react-router-dom'
 
 const List = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -10,6 +10,8 @@ const List = () => {
       <button onClick={() => setSearchParams({ num: '88' })}>
         setSearchParams
       </button>
+      <Link to="/ads/detail/1">detail 1</Link>
+      <Link to="/ads/detail/2">detail 2</Link>
     </>
   )
 }
