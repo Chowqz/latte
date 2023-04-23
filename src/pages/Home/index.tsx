@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react'
-import { useNavigate, Outlet } from 'react-router-dom'
+import { useNavigate, Outlet, useLocation } from 'react-router-dom'
 import { Layout, Menu, MenuProps, Spin } from 'antd'
 import { RouteConfig, RouteItem } from '~/router'
 import styles from './index.module.less'
@@ -24,6 +24,7 @@ function getItems(routes: RouteItem[]): MenuItem[] {
 
 const Home = () => {
   const navigate = useNavigate()
+  const location = useLocation()
 
   const items = getItems(RouteConfig)
 
@@ -35,6 +36,8 @@ const Home = () => {
   useEffect(() => {
     console.log('mounted')
   }, [])
+
+  console.log(location)
 
   return (
     <Layout className={styles.container}>

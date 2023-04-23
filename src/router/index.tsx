@@ -17,9 +17,9 @@ export interface RouteItem {
 
 export const RouteConfig: RouteItem[] = [
   {
-    name: 'Dialog',
-    path: '/dialog',
-    component: './pages/List',
+    name: 'Modal',
+    path: '/modal',
+    component: './pages/Modal',
     isMenuItem: true,
     icon: <AppstoreOutlined />,
   },
@@ -48,6 +48,23 @@ export const RouteConfig: RouteItem[] = [
       },
     ],
   },
+  {
+    name: 'React Transition Group',
+    path: '/react-transition-group',
+    component: './pages/Transition',
+    isMenuItem: true,
+  },
+  {
+    name: 'Promise',
+    path: '/promise',
+    component: './pages/Promise',
+    isMenuItem: true,
+  },
+  {
+    name: 'Promise',
+    path: '/promise/promise-plus-demo',
+    component: './pages/Promise/PromisePlusDemo',
+  },
 ]
 
 const getRoutes = (routes: RouteItem[]) => {
@@ -56,7 +73,7 @@ const getRoutes = (routes: RouteItem[]) => {
     if (children) {
       total.push(...getRoutes(children))
     } else {
-      const Element = lazy(() => import('../' + component))
+      const Element = lazy(() => import(/* @vite-ignore */ '../' + component))
       total.push({
         path: path.slice(1),
         element: <Element />,

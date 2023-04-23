@@ -1,0 +1,27 @@
+.box{
+  width: 200px;
+  height: 200px;
+  background-color: red;
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 3000ms;
+}
+
+.fade-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: all 3000ms;
+  transform: translateX(100%);
+}
