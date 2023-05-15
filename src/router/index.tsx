@@ -26,7 +26,7 @@ export const RouteConfig: RouteItem[] = [
   {
     name: 'ads',
     path: '/ads',
-    isMenuItem: true,
+    // isMenuItem: true,
     children: [
       {
         name: 'Search Ads',
@@ -64,6 +64,17 @@ export const RouteConfig: RouteItem[] = [
     name: 'Promise',
     path: '/promise/promise-plus-demo',
     component: './pages/Promise/PromisePlusDemo',
+  },
+  {
+    name: 'Promise',
+    path: '/promise/scheduler-demo',
+    component: './pages/Promise/SchedulerDemo',
+  },
+  {
+    name: 'EventEmitter',
+    path: '/event-emitter/',
+    component: './pages/EventEmitter',
+    isMenuItem: true,
   },
 ]
 

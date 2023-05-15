@@ -241,5 +241,6 @@ module.exports = {
     'symbol-description': 'error',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-inferrable-types': 'off',
   },
 }
