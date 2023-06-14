@@ -76,6 +76,12 @@ export const RouteConfig: RouteItem[] = [
     component: './pages/EventEmitter',
     isMenuItem: true,
   },
+  {
+    name: 'LifeCycle',
+    path: '/life-cycle',
+    component: './pages/LifeCycle',
+    isMenuItem: true,
+  },
 ]
 
 const getRoutes = (routes: RouteItem[]) => {
