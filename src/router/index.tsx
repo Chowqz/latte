@@ -4,6 +4,7 @@ import { AppstoreOutlined, MailOutlined } from '@ant-design/icons'
 import Home from '~/pages/Home'
 import Login from '~/pages/Login'
 import NotFound from '~/pages/NotFound'
+import LazyLoad from '~/pages/LazyLoad'
 
 export interface RouteItem {
   name: string
@@ -111,6 +112,10 @@ export const genRouteMap = () => {
     {
       path: '/login',
       element: <Login />,
+    },
+    {
+      path: '/lazy-load',
+      element: <LazyLoad />,
     },
     {
       path: '*',
