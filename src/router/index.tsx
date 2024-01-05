@@ -83,6 +83,12 @@ export const RouteConfig: RouteItem[] = [
     component: './pages/LifeCycle',
     isMenuItem: true,
   },
+  {
+    name: 'Form',
+    path: '/form',
+    component: './pages/Form/FormDemo',
+    isMenuItem: true,
+  },
 ]
 
 const getRoutes = (routes: RouteItem[]) => {

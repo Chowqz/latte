@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "antd": "^5.4.0",
+    "async-validator": "^4.2.5",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
