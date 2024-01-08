@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from 'antd'
-import Form from '~/components/Form/Form'
-import FormItem from '~/components/Form/FormItem'
 import Input from '~/components/Form/Input'
-import { useForm } from '~/components/Form/FormStore'
+import { useForm, Form, FormItem } from '~/components/Form'
 
 const FormDemo = () => {
   const [form] = useForm<{
     userName: string
     password: string
     age: string
+    sex: string
   }>()
+
+  const [hidden, setHidden] = useState(false)
 
   const handleValuesChange = (changedValues: any, allValues: any) => {
     console.log('changedValues: ', changedValues)
@@ -35,10 +36,32 @@ const FormDemo = () => {
   }
 
   const setFieldsValue = () => {
-    form.setFieldValue('userName', 'hello world')
+    form.setFieldValue('password', 'hello world')
     form.setFieldsValue({
-      password: undefined,
+      userName: undefined,
     })
+  }
+
+  const getFieldError = () => {
+    const errors = form.getFieldError('password')
+    console.log(errors)
+    const errorList = form.getFieldsError(['sex', 'userName'])
+    console.log('errorList', errorList)
+  }
+
+  const validateFields = async () => {
+    const fieldError = await form.validateFields(['password'])
+    console.log(fieldError)
+  }
+
+  const setFieldData = () => {
+    form.setFields([
+      {
+        name: 'password',
+        value: 'chowqz',
+        errors: [],
+      },
+    ])
   }
 
   return (
@@ -51,6 +74,7 @@ const FormDemo = () => {
         onFinishFailed={handleFinishFailed}
       >
         <FormItem
+          label="User Name"
           name="userName"
           rules={[
             {
@@ -61,18 +85,21 @@ const FormDemo = () => {
         >
           <Input />
         </FormItem>
-        <FormItem
-          name="password"
-          rules={[
-            {
-              type: 'string',
-              required: true,
-            },
-            { type: 'enum', enum: ['admin', 'user', 'guest'] },
-          ]}
-        >
-          <Input />
-        </FormItem>
+        <div>
+          <FormItem
+            label={<span>Password</span>}
+            name="password"
+            rules={[
+              {
+                type: 'string',
+                required: true,
+              },
+              { type: 'enum', enum: ['admin', 'user', 'guest'] },
+            ]}
+          >
+            <Input />
+          </FormItem>
+        </div>
         <FormItem
           name="age"
           // rules={{
@@ -82,9 +109,24 @@ const FormDemo = () => {
         >
           <Input />
         </FormItem>
+        <FormItem
+          name="sex"
+          rules={{
+            type: 'string',
+            required: true,
+          }}
+          hidden={hidden}
+        >
+          <Input />
+        </FormItem>
         <Button onClick={handleSubmit}>Submit</Button>
         <Button onClick={handleReset}>Reset</Button>
         <Button onClick={setFieldsValue}>setFieldsValue</Button>
+        <Button onClick={() => setHidden(prev => !prev)}>setHidden</Button>
+        <Button onClick={getFieldError}>getFieldError</Button>
+        <Button onClick={validateFields}>validateFields</Button>
+        <Button onClick={setFieldData}>setFieldData</Button>
+        jjj
       </Form>
     </>
   )

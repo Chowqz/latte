@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form } from 'antd'
+import { Form, Input } from 'antd'
 
 const Login = () => {
   const [form] = Form.useForm<{
@@ -11,6 +11,14 @@ const Login = () => {
     userName: 'dd',
   })
 
+  const setFieldValue = () => {
+    form.setFieldValue('test', 111)
+  }
+
+  const getFieldValue = () => {
+    console.log(form.getFieldValue('test'))
+  }
+
   return (
     <>
       <Form<{
@@ -21,8 +29,13 @@ const Login = () => {
         initialValues={{
           color: 'a',
         }}
-      ></Form>
-      <div>Login</div>
+      >
+        <Form.Item name="userName">
+          <Input />
+        </Form.Item>
+      </Form>
+      <div onClick={setFieldValue}>Login</div>
+      <div onClick={getFieldValue}>getFieldValue</div>
     </>
   )
 }

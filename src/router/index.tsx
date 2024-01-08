@@ -86,7 +86,7 @@ export const RouteConfig: RouteItem[] = [
   {
     name: 'Form',
     path: '/form',
-    component: './pages/Form/FormDemo',
+    component: './pages/Form',
     isMenuItem: true,
   },
 ]

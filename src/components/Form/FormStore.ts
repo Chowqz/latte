@@ -1,12 +1,12 @@
-/* eslint-disable no-useless-constructor */
-import Schema, { Rules } from 'async-validator'
 import { useRef } from 'react'
+import Schema, { Rules } from 'async-validator'
 import {
   Store,
   FormInstance,
   Callbacks,
   NamePath,
-  ValidateError,
+  FieldError,
+  FieldData,
 } from './Form.d'
 import FormItem from './FormItem'
 
@@ -38,6 +38,16 @@ class FormStore {
     }
   }
 
+  getFieldsEntity(nameList?: NamePath[]) {
+    return nameList
+      ? this.fieldsEntity.filter(item => nameList.includes(item.props.name))
+      : this.fieldsEntity
+  }
+
+  getFieldEntity(name: NamePath) {
+    return this.fieldsEntity.find(item => item.props.name === name)
+  }
+
   resetFields(nameList?: NamePath[]) {
     const initialValues = nameList
       ? Object.entries(this.initialValues).reduce<Store>(
@@ -65,11 +75,9 @@ class FormStore {
         ...this.initialValues,
       }
       const keys = Object.keys(values)
-      this.fieldsEntity
-        .filter(entity => keys.includes(entity.props.name))
-        .forEach(entity => {
-          entity.onStoreChange()
-        })
+      this.getFieldsEntity(keys).forEach(entity => {
+        entity.onStoreChange()
+      })
     }
   }
 
@@ -87,12 +95,10 @@ class FormStore {
       ...values,
     }
     const nameList = Object.keys(values)
-    this.fieldsEntity
-      .filter(entity => nameList.includes(entity.props.name))
-      .forEach(entity => {
-        entity.onStoreChange()
-        reset && entity.setErrors([])
-      })
+    this.getFieldsEntity(nameList).forEach(entity => {
+      entity.onStoreChange()
+      reset && entity.setErrors([])
+    })
     if (!reset) {
       this.validateFields(nameList)
       this.callbacks.onValuesChange?.(values, this.store)
@@ -113,9 +119,7 @@ class FormStore {
   }
 
   validateFields(nameList?: NamePath[]) {
-    const fieldsEntity = nameList
-      ? this.fieldsEntity.filter(entity => nameList.includes(entity.props.name))
-      : this.fieldsEntity
+    const fieldsEntity = this.getFieldsEntity(nameList)
     const data: Store = {}
     const descriptor: Rules = {}
     fieldsEntity.forEach(entity => {
@@ -128,9 +132,9 @@ class FormStore {
 
     if (Object.keys(data).length) {
       const validator = new Schema(descriptor)
-      return new Promise<ValidateError[]>(resolve => {
+      return new Promise<FieldError[]>(resolve => {
         validator.validate(data, errors => {
-          const errorsRes: ValidateError[] = []
+          const errorsRes: FieldError[] = []
           const errorsData = (errors || []).reduce<Record<string, string[]>>(
             (total, item) => {
               const { field, message } = item
@@ -165,6 +169,31 @@ class FormStore {
     return Promise.resolve([])
   }
 
+  getFieldError(name: NamePath) {
+    const fieldEntity = this.getFieldEntity(name)
+    return fieldEntity?.state.errors || []
+  }
+
+  getFieldsError(nameList?: NamePath[]) {
+    const fieldsEntity = this.getFieldsEntity(nameList)
+    return fieldsEntity.map(item => {
+      return {
+        name: item.props.name,
+        value: this.store[item.props.name],
+        errors: item.state.errors,
+      }
+    })
+  }
+
+  setFields(fields: FieldData[]) {
+    fields.forEach(item => {
+      const { name, value, errors } = item
+      this.store[name] = value
+      const fieldEntity = this.getFieldEntity(name)
+      fieldEntity?.setErrors(errors)
+    })
+  }
+
   async submit() {
     const errors = await this.validateFields()
     if (errors.length) {
@@ -185,6 +214,10 @@ class FormStore {
       validateFields: this.validateFields.bind(this),
       setCallbacks: this.setCallbacks.bind(this),
       resetFields: this.resetFields.bind(this),
+      getFieldError: this.getFieldError.bind(this),
+      getFieldsError: this.getFieldsError.bind(this),
+      setFields: this.setFields.bind(this),
+      getFieldEntity: this.getFieldEntity.bind(this),
       submit: this.submit.bind(this),
     }
   }

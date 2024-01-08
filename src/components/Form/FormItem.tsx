@@ -6,8 +6,9 @@ import { Rule } from 'async-validator'
 interface FormItemProps {
   name: string
   children: React.ReactElement
-  label?: string
+  label?: React.ReactNode
   rules?: Rule
+  hidden?: boolean
 }
 
 interface State {
@@ -61,8 +62,10 @@ export default class FormItem extends React.Component<FormItemProps, State> {
   }
 
   render() {
+    if (this.props.hidden) return null
     return (
       <div>
+        <div>{this.props.label}</div>
         {React.cloneElement(this.props.children, this.getControlled())}
         {!!this.state.errors.length && <div>{this.state.errors[0]}</div>}
       </div>
