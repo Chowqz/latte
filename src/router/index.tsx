@@ -5,6 +5,7 @@ import Home from '~/pages/Home'
 import Login from '~/pages/Login'
 import NotFound from '~/pages/NotFound'
 import LazyLoad from '~/pages/LazyLoad'
+import Combat from '~/pages/Combat'
 
 export interface RouteItem {
   name: string
@@ -89,6 +90,12 @@ export const RouteConfig: RouteItem[] = [
     component: './pages/Form',
     isMenuItem: true,
   },
+  {
+    name: 'ErrorBoundary',
+    path: '/error-boundary',
+    component: './pages/ErrorBoundary',
+    isMenuItem: true,
+  },
 ]
 
 const getRoutes = (routes: RouteItem[]) => {
@@ -122,6 +129,10 @@ export const genRouteMap = () => {
     {
       path: '/lazy-load',
       element: <LazyLoad />,
+    },
+    {
+      path: '/combat',
+      element: <Combat />,
     },
     {
       path: '*',

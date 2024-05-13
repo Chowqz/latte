@@ -4,6 +4,23 @@
     <title>Modular Demo</title>
   </head>
   <body>
+    <button id="btn" onclick="obj.say()" >点击</button>
     <script data-main="js/main" src="js/libs/require.js"></script>
+    <script>
+      function handleClick() {
+        console.log(this)
+      }
+      function test() {
+        console.log(this)
+        handleClick()
+      }
+      test()
+      const obj = {
+        say: function() {
+          // console.log('hello')
+        }
+      }
+      document.getElementById('btn').addEventListener('click',test.bind(this))
+    </script>
   </body>
 </html>
