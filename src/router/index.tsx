@@ -6,6 +6,7 @@ import Login from '~/pages/Login'
 import NotFound from '~/pages/NotFound'
 import LazyLoad from '~/pages/LazyLoad'
 import Combat from '~/pages/Combat'
+import TouchEventDelay from '~/pages/TouchEventDelay'
 
 export interface RouteItem {
   name: string
@@ -133,6 +134,10 @@ export const genRouteMap = () => {
     {
       path: '/combat',
       element: <Combat />,
+    },
+    {
+      path: '/touch-event-delay',
+      element: <TouchEventDelay />,
     },
     {
       path: '*',

@@ -1,4 +1,5 @@
 /* eslint-disable */
+// call/apply/bind 方法封装
 
 Function.prototype.myCall = function (context, ...args) {
   const fn = this
