@@ -1,12 +1,14 @@
 import React, { lazy, ReactNode } from 'react'
 import { RouteObject } from 'react-router-dom'
-import { AppstoreOutlined, MailOutlined } from '@ant-design/icons'
+import { AppstoreOutlined } from '@ant-design/icons'
 import Home from '~/pages/Home'
 import Login from '~/pages/Login'
 import NotFound from '~/pages/NotFound'
 import LazyLoad from '~/pages/LazyLoad'
 import Combat from '~/pages/Combat'
 import TouchEventDelay from '~/pages/TouchEventDelay'
+import ClassComponent from '~/pages/SetState/classComponent'
+import FunComponent from '~/pages/SetState/FunComponent'
 
 export interface RouteItem {
   name: string
@@ -25,31 +27,6 @@ export const RouteConfig: RouteItem[] = [
     component: './pages/Modal',
     isMenuItem: true,
     icon: <AppstoreOutlined />,
-  },
-  {
-    name: 'ads',
-    path: '/ads',
-    // isMenuItem: true,
-    children: [
-      {
-        name: 'Search Ads',
-        path: '/ads/search-ads',
-        component: './pages/SearchAds',
-        isMenuItem: true,
-      },
-      {
-        name: 'Rcmd Ads',
-        path: '/ads/rcmdAds',
-        component: './pages/RcmdAds',
-        isMenuItem: true,
-        icon: <MailOutlined />,
-      },
-      {
-        name: 'Ads Detail',
-        path: '/ads/detail/:id',
-        component: './pages/Detail',
-      },
-    ],
   },
   {
     name: 'React Transition Group',
@@ -97,6 +74,19 @@ export const RouteConfig: RouteItem[] = [
     component: './pages/ErrorBoundary',
     isMenuItem: true,
   },
+  {
+    name: 'SetState',
+    path: '/setstate',
+    children: [
+      {
+        name: 'Class Component',
+        path: '/setstate/class-component',
+        component: './pages/SetState/ClassComponent',
+        isMenuItem: true,
+      },
+    ],
+    isMenuItem: true,
+  },
 ]
 
 const getRoutes = (routes: RouteItem[]) => {
@@ -138,6 +128,14 @@ export const genRouteMap = () => {
     {
       path: '/touch-event-delay',
       element: <TouchEventDelay />,
+    },
+    {
+      path: '/setstate-class-component',
+      element: <ClassComponent />,
+    },
+    {
+      path: '/setstate-fun-component',
+      element: <FunComponent />,
     },
     {
       path: '*',
