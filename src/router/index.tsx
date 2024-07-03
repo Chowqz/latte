@@ -9,6 +9,7 @@ import Combat from '~/pages/Combat'
 import TouchEventDelay from '~/pages/TouchEventDelay'
 import ClassComponent from '~/pages/SetState/classComponent'
 import FunComponent from '~/pages/SetState/FunComponent'
+import ReduxDemo from '~/pages/ReduxDemo'
 
 export interface RouteItem {
   name: string
@@ -136,6 +137,10 @@ export const genRouteMap = () => {
     {
       path: '/setstate-fun-component',
       element: <FunComponent />,
+    },
+    {
+      path: '/redux-demo',
+      element: <ReduxDemo />,
     },
     {
       path: '*',
