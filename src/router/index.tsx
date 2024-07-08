@@ -10,6 +10,7 @@ import TouchEventDelay from '~/pages/TouchEventDelay'
 import ClassComponent from '~/pages/SetState/classComponent'
 import FunComponent from '~/pages/SetState/FunComponent'
 import ReduxDemo from '~/pages/ReduxDemo'
+import ReactEvent from '~/pages/ReactEvent'
 
 export interface RouteItem {
   name: string
@@ -141,6 +142,10 @@ export const genRouteMap = () => {
     {
       path: '/redux-demo',
       element: <ReduxDemo />,
+    },
+    {
+      path: '/react-event',
+      element: <ReactEvent />,
     },
     {
       path: '*',
