@@ -6,6 +6,9 @@ import { store } from './store'
 import App from './App'
 import './index.css'
 
+const a = 1
+console.log(a)
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
     <BrowserRouter>
