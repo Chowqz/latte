@@ -43,7 +43,7 @@ const Home = () => {
     <Layout className={styles.container}>
       <Sider width="260">
         <div className={styles.systemNameWrapper}>
-          <h3 className={styles.systemName}>Admin</h3>
+          <h3 className={styles.systemName}>React</h3>
         </div>
         <Menu
           className={styles.menu}

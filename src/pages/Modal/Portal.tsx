@@ -6,13 +6,18 @@ interface Props {
 }
 
 const Portal = ({ children }: Props) => {
-  const container = useRef<HTMLDivElement>(document.createElement('div'))
+  const container = useRef<HTMLElement | null>(null)
+
   useEffect(() => {
-    document.body.appendChild(container.current)
     return () => {
-      document.body.removeChild(container.current)
+      document.body.removeChild(container.current!)
     }
   }, [])
+
+  if (!container.current) {
+    container.current = document.createElement('div')
+    document.body.appendChild(container.current)
+  }
 
   return ReactDom.createPortal(children, container.current)
 }

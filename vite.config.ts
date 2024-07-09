@@ -52,4 +52,9 @@ export default defineConfig({
       ...imageProxyConfig,
     },
   },
+  css: {
+    modules: {
+      localsConvention: 'camelCase',
+    },
+  },
 })
