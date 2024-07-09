@@ -9,6 +9,9 @@ import './index.css'
 const a = 1
 console.log(a)
 
+const b = 2
+console.log(b)
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
     <BrowserRouter>
