@@ -22,9 +22,12 @@ const Modal = ({ visible, title, children, onOk, onCancel }: Props) => {
 
   return (
     <>
-      {visible && (
+      {
         <Portal>
-          <div className="modal-root">
+          <div
+            className="modal-root"
+            style={{ display: visible ? 'block' : 'none' }}
+          >
             <div className={styles.modalMask}></div>
             <div className={styles.modalWrap}>
               <div className={styles.modal}>
@@ -40,7 +43,7 @@ const Modal = ({ visible, title, children, onOk, onCancel }: Props) => {
             </div>
           </div>
         </Portal>
-      )}
+      }
     </>
   )
 }
