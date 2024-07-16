@@ -89,6 +89,12 @@ export const RouteConfig: RouteItem[] = [
     ],
     isMenuItem: true,
   },
+  {
+    name: 'RequestAnimationFrame',
+    path: '/request-animation-frame',
+    component: './pages/RequestAnimationFrame',
+    isMenuItem: true,
+  },
 ]
 
 const getRoutes = (routes: RouteItem[]) => {
